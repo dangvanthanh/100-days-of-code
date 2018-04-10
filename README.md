@@ -1,2 +1,5 @@
-# 100-days-of-code
-100 Days Of Code
+# 100 Days Of Code
+
+# Table Of Contents
+
+* [Day Zero - Beginning](/)
