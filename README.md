@@ -2,4 +2,4 @@
 
 # Table Of Contents
 
-* [Day Zero - Beginning](/)
+* [Day Zero - Beginning]()
