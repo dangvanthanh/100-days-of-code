@@ -2,4 +2,9 @@
 
 # Table Of Contents
 
-* [Day Zero - Beginning]()
+* JavaScript
+* D3.js
+* RxJS
+* Elm
+* Node.js
+* Elixir/Phoenix
