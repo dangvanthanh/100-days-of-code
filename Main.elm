@@ -1,6 +1,6 @@
 module Main exposing (..)
 
-import Html
+import Html exposing (text)
 
 
 type alias Item =
@@ -11,6 +11,7 @@ type alias Item =
     }
 
 
+add : Int -> Int -> Int
 add a b =
     a + b
 
@@ -44,6 +45,7 @@ cart =
     ]
 
 
+fiveOrMoreDiscount : Item -> Item
 fiveOrMoreDiscount item =
     if item.qty >= 5 then
         { item
@@ -77,5 +79,5 @@ newCart =
 main : Html.Html msg
 main =
     -- Html.text (toString result)
-    Html.text
+    text
         (toString newCart)
