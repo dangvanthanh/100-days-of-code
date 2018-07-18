@@ -15,8 +15,8 @@ type alias Model =
     }
 
 
-initModel : Model
-initModel =
+init : Model
+init =
     { calories = 0
     , input = 0
     , error = Nothing
@@ -51,7 +51,7 @@ update msg model =
                     { model | input = 0, error = Just err }
 
         Clear ->
-            initModel
+            init
 
 
 
@@ -91,7 +91,7 @@ view model =
 main : Program Never Model Msg
 main =
     Html.beginnerProgram
-        { model = initModel
+        { model = init
         , update = update
         , view = view
         }
