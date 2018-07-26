@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vote</title>
+  <style>
+    body {
+      text-align: center;
+    }
+
+    button {
+      border: 1px solid rgba(gray, gray, gray, .79);
+      color: #444;
+      padding: 5px 16px;
+      margin: 5px;
+    }
+
+    button.active {
+      color: #fff;
+    }
+
+    .button-up-vote.active {
+      background: rgba(71, 184, 129);
+    }
+
+    .button-down-vote.active {
+      background: rgb(1, 108, 209);
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="dist/js/vote.js"></script>
+  <script>
+    Elm.Main.embed(document.getElementById('app'))
+  </script>
+</body>
+</html>
