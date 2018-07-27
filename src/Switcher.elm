@@ -59,15 +59,18 @@ filterChannels channels query =
         List.filter (containsCaseInsensitive query) channels
 
 
+renderChannelName : String -> String
+renderChannelName name =
+    name
+        |> String.toUpper
+        |> String.reverse
+        |> String.reverse
+
+
 renderChannel : String -> Html Msg
 renderChannel name =
     li [ class "collection-item" ]
-        [ text
-            (name
-                |> String.toUpper
-                |> String.reverse
-                |> String.reverse
-            )
+        [ text (renderChannelName name)
         ]
 
 
