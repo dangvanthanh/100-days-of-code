@@ -62,8 +62,9 @@ filterChannels channels query =
 renderChannelName : String -> String
 renderChannelName name =
     name
-        |> String.toUpper
+        |> String.append "Language "
         |> String.reverse
+        |> String.toUpper
         |> String.reverse
 
 
