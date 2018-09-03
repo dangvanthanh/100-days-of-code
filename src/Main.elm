@@ -1,8 +1,9 @@
-module Main exposing (..)
+module Main exposing (Model, Msg(..), main, model, update, view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+
 
 
 -- model
@@ -62,13 +63,14 @@ view : Model -> Html Msg
 view model =
     div []
         [ h3 []
-            [ text ("Total Calories: " ++ (toString model.calories)) ]
+            [ text ("Total Calories: " ++ toString model.calories) ]
         , input
             [ type_ "text"
             , onInput Input
             , value
                 (if model.input == 0 then
                     ""
+
                  else
                     toString model.input
                 )

@@ -1,4 +1,4 @@
-module Main exposing (..)
+module Main exposing (Model, Msg(..), init, main, subscriptions, svgCirclesForDiceFace, update, view)
 
 import Html exposing (..)
 import Html.Attributes
@@ -7,6 +7,7 @@ import List
 import Random
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
+
 
 
 -- model
@@ -64,7 +65,7 @@ view model =
             , fill "white"
             , stroke "black"
             , strokeWidth "3"
-            , Html.Attributes.style [ ( "padding-left", "20px" ) ]
+            , Html.Attributes.style "padding-left" "20px"
             ]
             (List.append
                 [ rect

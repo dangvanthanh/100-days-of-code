@@ -1,8 +1,9 @@
-module Main exposing (..)
+module Main exposing (Model, Msg(..), filterChannels, main, model, renderChannel, renderChannelName, renderChannels, update, view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+
 
 
 -- model
@@ -56,7 +57,7 @@ filterChannels channels query =
         containsCaseInsensitive str1 str2 =
             String.contains (String.toLower str1) (String.toLower str2)
     in
-        List.filter (containsCaseInsensitive query) channels
+    List.filter (containsCaseInsensitive query) channels
 
 
 renderChannelName : String -> String
@@ -81,7 +82,7 @@ renderChannels channels =
         channelItems =
             List.map renderChannel channels
     in
-        ul [ class "collection" ] channelItems
+    ul [ class "collection" ] channelItems
 
 
 view : Model -> Html Msg

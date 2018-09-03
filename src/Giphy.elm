@@ -1,6 +1,6 @@
-module Main exposing (..)
+module Main exposing (Model, Msg(..), decodeGifUrl, getRandomGif, init, main, subscriptions, update, view)
 
-import Html exposing (Html, div, text, button, h2, img, br)
+import Html exposing (Html, br, button, div, h2, img, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Http
@@ -72,7 +72,7 @@ getRandomGif topic =
         request =
             Http.get url decodeGifUrl
     in
-        Http.send NewGif request
+    Http.send NewGif request
 
 
 decodeGifUrl : Decode.Decoder String

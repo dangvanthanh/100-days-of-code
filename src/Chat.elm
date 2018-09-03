@@ -1,4 +1,4 @@
-module Main exposing (..)
+module Main exposing (Model, Msg(..), echoServer, init, main, subscriptions, update, view, viewMessage)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -48,7 +48,7 @@ update msg model =
             ( { model | input = "" }, WebSocket.send echoServer model.input )
 
         NewMessage str ->
-            ( { model | messages = (str :: model.messages) }, Cmd.none )
+            ( { model | messages = str :: model.messages }, Cmd.none )
 
 
 subscriptions : Model -> Sub Msg

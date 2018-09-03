@@ -1,8 +1,9 @@
-module Main exposing (..)
+module Main exposing (Model, Msg(..), main, model, notPlayingView, playingView, update, view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+
 
 
 -- model
@@ -48,6 +49,7 @@ view : Model -> Html Msg
 view model =
     if model.playing then
         playingView model
+
     else
         notPlayingView model
 

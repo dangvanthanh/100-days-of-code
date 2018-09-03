@@ -1,9 +1,10 @@
-module Main exposing (..)
+module Main exposing (Model, Msg(..), answer, currentQuestion, main, model, pointQuestion, update, view)
 
 import Html exposing (..)
-import Html.Events exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import Questions exposing (..)
+
 
 
 -- model
@@ -40,15 +41,16 @@ update msg model =
                 question =
                     currentQuestion (List.head model.questions)
             in
-                { model
-                    | index = model.index + 1
-                    , questions = List.drop 1 model.questions
-                    , score =
-                        if answer == question.correctAnswer then
-                            model.score + 1
-                        else
-                            model.score
-                }
+            { model
+                | index = model.index + 1
+                , questions = List.drop 1 model.questions
+                , score =
+                    if answer == question.correctAnswer then
+                        model.score + 1
+
+                    else
+                        model.score
+            }
 
 
 
@@ -71,9 +73,10 @@ currentQuestion question =
 pointQuestion : Int -> String
 pointQuestion score =
     if score > 1 then
-        (toString score) ++ " points"
+        toString score ++ " points"
+
     else
-        (toString score) ++ " point"
+        toString score ++ " point"
 
 
 answer : String -> Html Msg
@@ -87,17 +90,18 @@ view model =
         question =
             currentQuestion (List.head model.questions)
     in
-        if question.question /= "" then
-            div []
-                [ h1 [ class "title" ] [ text "Quiz" ]
-                , div [ class "question" ] [ text question.question ]
-                , div [] (List.map answer question.answers)
-                ]
-        else
-            div []
-                [ h1 [ class "title" ] [ text "Quiz" ]
-                , h3 [ class "title score" ] [ text ("You got " ++ pointQuestion (model.score)) ]
-                ]
+    if question.question /= "" then
+        div []
+            [ h1 [ class "title" ] [ text "Quiz" ]
+            , div [ class "question" ] [ text question.question ]
+            , div [] (List.map answer question.answers)
+            ]
+
+    else
+        div []
+            [ h1 [ class "title" ] [ text "Quiz" ]
+            , h3 [ class "title score" ] [ text ("You got " ++ pointQuestion model.score) ]
+            ]
 
 
 main : Program Never Model Msg

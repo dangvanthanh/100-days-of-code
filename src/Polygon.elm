@@ -1,4 +1,4 @@
-module Main exposing (..)
+module Main exposing (Model, Msg(..), init, main, numeral, update, view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -46,15 +46,16 @@ numeral : Int -> List (Svg msg)
 numeral x =
     let
         dphi =
-            2.0 * pi / (toFloat x)
+            2.0 * pi / toFloat x
 
         phis =
-            List.map (\i -> (toFloat i) * dphi)
+            List.map (\i -> toFloat i * dphi)
     in
-        if x == 0 then
-            [ circle [ SA.cx "50", SA.cy "50", SA.r "20", SA.stroke "black", SA.fill "none" ] [] ]
-        else
-            [ path [ SA.stroke "black", SA.d "M 50 30, L 50 70" ] [] ]
+    if x == 0 then
+        [ circle [ SA.cx "50", SA.cy "50", SA.r "20", SA.stroke "black", SA.fill "none" ] [] ]
+
+    else
+        [ path [ SA.stroke "black", SA.d "M 50 30, L 50 70" ] [] ]
 
 
 main : Program Never Model Msg

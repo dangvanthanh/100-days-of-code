@@ -1,4 +1,4 @@
-module Main exposing (..)
+module Main exposing (Model, Msg(..), main, model, update, view, viewValidation)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -61,7 +61,8 @@ viewValidation model =
         ( color, message ) =
             if model.password == model.passwordAgain then
                 ( "green", "Ok" )
+
             else
                 ( "red", "Password do not match" )
     in
-        div [ style [ ( "color", color ) ] ] [ text message ]
+    div [ style "color" color ] [ text message ]

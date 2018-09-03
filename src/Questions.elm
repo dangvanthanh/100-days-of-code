@@ -1,4 +1,4 @@
-module Questions exposing (..)
+module Questions exposing (Question, fourQuestion, oneQuestion, question, threeQuestion, twoQuestion)
 
 
 type alias Question =

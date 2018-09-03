@@ -1,8 +1,9 @@
-module Main exposing (..)
+module Main exposing (Model, Msg(..), Todo, addItem, clearItem, main, model, todoApp, todoAside, todoForm, todoHeader, todoItem, todoList, update, view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+
 
 
 -- model
@@ -44,8 +45,9 @@ update msg model =
             { model | name = name }
 
         AddItem ->
-            if (String.isEmpty model.name) then
+            if String.isEmpty model.name then
                 model
+
             else
                 addItem model
 
@@ -64,7 +66,7 @@ clearItem model todo =
                 )
                 model.todos
     in
-        { model | todos = newTodos }
+    { model | todos = newTodos }
 
 
 addItem : Model -> Model
@@ -76,10 +78,10 @@ addItem model =
         newTodos =
             todo :: model.todos
     in
-        { model
-            | todos = newTodos
-            , name = ""
-        }
+    { model
+        | todos = newTodos
+        , name = ""
+    }
 
 
 

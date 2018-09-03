@@ -1,8 +1,9 @@
-module Main exposing (..)
+module Main exposing (Model, Msg(..), main, model, update, view)
 
 import Html exposing (..)
-import Html.Events exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (..)
+
 
 
 -- model
@@ -38,6 +39,7 @@ update msg model =
                 | voteType =
                     if model.voteType == voteType then
                         0
+
                     else
                         1
             }
@@ -47,6 +49,7 @@ update msg model =
                 | voteType =
                     if model.voteType == voteType then
                         0
+
                     else
                         -1
             }

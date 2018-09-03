@@ -1,4 +1,4 @@
-module Main exposing (..)
+module Main exposing (Model, Msg(..), draggableItemView, itemView, main, model, onDragEnd, onDragOver, onDragStart, onDrop, update, view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)

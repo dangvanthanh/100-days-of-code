@@ -1,7 +1,9 @@
-module Main exposing (..)
+module Main exposing (Model, Msg(..), init, main, update, view)
 
-import Html exposing (..)
+import Browser
+import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (..)
+
 
 
 -- model
@@ -13,8 +15,8 @@ type alias Model =
     }
 
 
-model : Model
-model =
+init : Model
+init =
     { suit = "♥"
     , rank = "A"
     }
@@ -29,10 +31,10 @@ type Msg
 
 
 update : Msg -> Model -> Model
-update msg model =
+update msg card =
     case msg of
         ShuffleCard ->
-            model
+            card
 
 
 
@@ -40,20 +42,19 @@ update msg model =
 
 
 view : Model -> Html Msg
-view model =
+view card =
     div []
         [ div [ class "card" ]
-            [ span [ class "card__suit" ] [ text model.suit ]
-            , span [ class "card__number" ] [ text model.rank ]
-            , span [ class "card__suit" ] [ text model.suit ]
+            [ span [ class "card__suit" ] [ text card.suit ]
+            , span [ class "card__number" ] [ text card.rank ]
+            , span [ class "card__suit" ] [ text card.suit ]
             ]
         ]
 
 
-main : Program Never Model Msg
 main =
-    Html.beginnerProgram
-        { model = model
+    Browser.sandbox
+        { init = init
         , update = update
         , view = view
         }

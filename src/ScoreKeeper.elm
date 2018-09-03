@@ -1,8 +1,9 @@
-module Main exposing (..)
+module Main exposing (Model, Msg(..), Play, Player, add, deletePlay, edit, main, model, play, playList, playListHeader, playSection, player, playerForm, playerList, playerListHeader, playerSection, pointTotal, save, score, update, view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+
 
 
 -- model
@@ -64,8 +65,9 @@ update msg model =
             { model | name = "", playerId = Nothing }
 
         Save ->
-            if (String.isEmpty model.name) then
+            if String.isEmpty model.name then
                 model
+
             else
                 save model
 
@@ -92,12 +94,13 @@ deletePlay model play =
                 (\player ->
                     if player.id == play.playerId then
                         { player | points = player.points - 1 * play.points }
+
                     else
                         player
                 )
                 model.players
     in
-        { model | plays = newPlays, players = newPlayers }
+    { model | plays = newPlays, players = newPlayers }
 
 
 score : Model -> Player -> Int -> Model
@@ -108,6 +111,7 @@ score model scorer points =
                 (\player ->
                     if player.id == scorer.id then
                         { player | points = player.points + points }
+
                     else
                         player
                 )
@@ -116,10 +120,10 @@ score model scorer points =
         play =
             Play (List.length model.plays) scorer.id scorer.name points
     in
-        { model
-            | players = newPlayers
-            , plays = play :: model.plays
-        }
+    { model
+        | players = newPlayers
+        , plays = play :: model.plays
+    }
 
 
 save : Model -> Model
@@ -140,6 +144,7 @@ edit model id =
                 (\player ->
                     if player.id == id then
                         { player | name = model.name }
+
                     else
                         player
                 )
@@ -150,17 +155,18 @@ edit model id =
                 (\play ->
                     if play.playerId == id then
                         { play | name = model.name }
+
                     else
                         play
                 )
                 model.plays
     in
-        { model
-            | players = newPlayers
-            , plays = newPlays
-            , name = ""
-            , playerId = Nothing
-        }
+    { model
+        | players = newPlayers
+        , plays = newPlays
+        , name = ""
+        , playerId = Nothing
+    }
 
 
 add : Model -> Model
@@ -172,10 +178,10 @@ add model =
         newPlayers =
             player :: model.players
     in
-        { model
-            | players = newPlayers
-            , name = ""
-        }
+    { model
+        | players = newPlayers
+        , name = ""
+    }
 
 
 
@@ -274,10 +280,10 @@ pointTotal model =
             List.map .points model.plays
                 |> List.sum
     in
-        footer []
-            [ div [] [ text "Total : " ]
-            , div [] [ text (toString total) ]
-            ]
+    footer []
+        [ div [] [ text "Total : " ]
+        , div [] [ text (toString total) ]
+        ]
 
 
 playerForm : Model -> Html Msg

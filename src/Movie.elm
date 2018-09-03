@@ -1,4 +1,4 @@
-module Main exposing (..)
+module Main exposing (Model, Movie, Msg(..), decodeMovieUrl, getMoviePoster, init, main, subscriptions, update, view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -50,11 +50,12 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         GetPoster ->
-            { model
+            ( { model
                 | posterUrl = "waiting.gif"
                 , title = ""
-            }
-                ! [ getMoviePoster model.searchString ]
+              }
+            , getMoviePoster model.searchString
+            )
 
         NewImg (Ok movie) ->
             ( Model model.searchString movie.title movie.posterUrl, Cmd.none )
@@ -67,10 +68,12 @@ update msg model =
                 errorImage =
                     "oh-no.jpeg"
             in
-                ( Model model.searchString errorMessage errorMessage, Cmd.none )
+            ( Model model.searchString errorMessage errorMessage, Cmd.none )
 
         UpdateSearchString newSearchString ->
-            { model | searchString = newSearchString } ! []
+            ( { model | searchString = newSearchString }
+            , Cmd.none
+            )
 
 
 
@@ -113,7 +116,7 @@ getMoviePoster searchString =
         url =
             "//www.omdbapi.com/?apikey=5bf7da94&t=" ++ searchString
     in
-        Http.send NewImg (Http.get url decodeMovieUrl)
+    Http.send NewImg (Http.get url decodeMovieUrl)
 
 
 type alias Movie =
