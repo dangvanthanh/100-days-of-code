@@ -5,6 +5,14 @@ import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (..)
 
 
+main =
+    Browser.sandbox
+        { init = init
+        , update = update
+        , view = view
+        }
+
+
 
 -- model
 
@@ -50,11 +58,3 @@ view card =
             , span [ class "card__suit" ] [ text card.suit ]
             ]
         ]
-
-
-main =
-    Browser.sandbox
-        { init = init
-        , update = update
-        , view = view
-        }

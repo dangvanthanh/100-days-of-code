@@ -1,10 +1,9 @@
 module Main exposing (Model, Msg(..), init, main, subscriptions, update, view)
 
 import Browser
-import Html exposing (Html)
-import Svg exposing (..)
-import Svg.Attributes exposing (..)
-import Time exposing (toMinute, toSecond)
+import Html exposing (Html, h1, text)
+import Task
+import Time
 
 
 main =
@@ -17,43 +16,52 @@ main =
 
 
 type alias Model =
-    Time.Posix
+    { zone : Time.Zone
+    , time : Time.Posix
+    }
 
 
-init : ( Model, Cmd Msg )
-init =
-    ( 0, Cmd.none )
+init : () -> ( Model, Cmd Msg )
+init _ =
+    ( Model Time.utc (Time.millisToPosix 0)
+    , Task.perform AdjustTimeZone Time.here
+    )
 
 
 type Msg
     = Tick Time.Posix
+    | AdjustTimeZone Time.Zone
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Tick newTime ->
-            ( newTime, Cmd.none )
+            ( { model | time = newTime }
+            , Cmd.none
+            )
+
+        AdjustTimeZone newZone ->
+            ( { model | zone = newZone }
+            , Cmd.none
+            )
 
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    toSecond Tick
+    Time.every 1000 Tick
 
 
 view : Model -> Html Msg
 view model =
     let
-        angle =
-            turns (toMinute model)
+        hour =
+            String.fromInt (Time.toHour model.zone model.time)
 
-        handX =
-            toString (50 + 40 * cos angle)
+        minute =
+            String.fromInt (Time.toMinute model.zone model.time)
 
-        handY =
-            toString (50 + 40 * sin angle)
+        second =
+            String.fromInt (Time.toSecond model.zone model.time)
     in
-    svg [ viewBox "0 0 100 100", width "300px" ]
-        [ circle [ cx "50", cy "50", r "45", fill "#0b79ce" ] []
-        , line [ x1 "50", y1 "50", x2 handX, y2 handY, stroke "#023963" ] []
-        ]
+    h1 [] [ text (hour ++ ":" ++ minute ++ ":" ++ second) ]
